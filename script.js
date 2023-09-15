@@ -6,6 +6,7 @@ var gameBoard = (function() {
     ];
     const writeBoard = () => {
         const boardgrid = document.getElementsByClassName("board")[0]
+        boardgrid.innerHTML = "";
         // Iterate through grid
         for (row of board) {
             for (item of row) {
@@ -20,8 +21,12 @@ var gameBoard = (function() {
     return {writeBoard}
 })();
 
+// Tell when player can input dom element
 var displayController = (function() {
-
+    // Boolean displays if it is Player 1's turn(true initially)
+    // Have an HTML element display Player 1's turn
+    // Player 1 clicks on an empty square during their turn
+    //
 })();
 
 function newPlayer(symbol, name) {
