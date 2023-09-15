@@ -1,0 +1,44 @@
+.site-container {
+  height: 100vh;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+* {
+  margin: 0px;
+}
+
+.game-container {
+  display: grid;
+  width: 100%;
+  flex: 1;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.player-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(208, 215, 222);
+}
+
+.board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-content: center;
+}
+
+.board-item {
+  border: solid 1px black;
+  padding: 20px;
+}/*# sourceMappingURL=styles.css.map */
