@@ -44,7 +44,6 @@ var displayController = (function() {
                 new_item.innerHTML = item;
                 new_item.setAttribute("value", index);
                 new_item.addEventListener('click', function(e) {
-                    takeTurn();
                     tileValue = e.target.getAttribute('value');
                     changeTile(tileValue);
                 })
@@ -59,8 +58,10 @@ var displayController = (function() {
             case "1": 
                 if (!gameBoard.board[0][0].includes("0")) {
                     document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
                 }
                 else {
+                    takeTurn();
                     gameBoard.board[0][0] = currentSymbol;
                 }
                 drawBoard();
@@ -68,15 +69,95 @@ var displayController = (function() {
             case "2": 
                 if (!gameBoard.board[0][1].includes("0")) {
                     document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
                 }
                 else {
+                    takeTurn();
                     gameBoard.board[0][1] = currentSymbol;
                 }
                 drawBoard(); 
                 break;
+            case "3": 
+                if (!gameBoard.board[0][2].includes("0")) {
+                    document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
+                }
+                else {
+                    takeTurn();
+                    gameBoard.board[0][2] = currentSymbol;
+                }
+                drawBoard(); 
+                break;
+            case "4": 
+                if (!gameBoard.board[1][0].includes("0")) {
+                    document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
+                }
+                else {
+                    takeTurn();
+                    gameBoard.board[1][0] = currentSymbol;
+                }
+                drawBoard(); 
+                break;
+            case "5": 
+                if (!gameBoard.board[1][1].includes("0")) {
+                    document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
+                }
+                else {
+                    takeTurn();
+                    gameBoard.board[1][1] = currentSymbol;
+                }
+                drawBoard();
+                break;
+            case "6": 
+                if (!gameBoard.board[1][2].includes("0")) {
+                    document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
+                }
+                else {
+                    takeTurn();
+                    gameBoard.board[1][2] = currentSymbol;
+                }
+                drawBoard(); 
+                break;
+            case "7": 
+                if (!gameBoard.board[2][0].includes("0")) {
+                    document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
+                }
+                else {
+                    takeTurn();
+                    gameBoard.board[2][0] = currentSymbol;
+                }
+                drawBoard();
+                break;
+            case "8": 
+                if (!gameBoard.board[2][1].includes("0")) {
+                    document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
+                }
+                else {
+                    takeTurn();
+                    gameBoard.board[2][1] = currentSymbol;
+                }
+                drawBoard(); 
+                break;
+            case "9": 
+                if (!gameBoard.board[2][2].includes("0")) {
+                    document.getElementsByClassName("status")[0].innerHTML = "That tile is taken.";
+                    changeTile();
+                }
+                else {
+                    takeTurn();
+                    gameBoard.board[2][2] = currentSymbol;
+                }
+                drawBoard(); 
+                break;
+                    
         }
     }
-    return {takeTurn, drawBoard};
+    return {drawBoard};
 })();
 
 function newPlayer(symbol, name) {
