@@ -4,21 +4,21 @@ var gameBoard = (function() {
         [0, 0, 0,],
         [0, 0, 0,], 
     ];
-    const writeBoard = () => {
-        const boardgrid = document.getElementsByClassName("board")[0]
-        boardgrid.innerHTML = "";
-        // Iterate through grid
-        for (row of board) {
-            for (item of row) {
-                let new_item = document.createElement("div");
-                new_item.className = "board-item";
-                new_item.innerHTML = item;
-                boardgrid.appendChild(new_item);
-            }
-        }
-    }
+    // const writeBoard = () => {
+    //     const boardgrid = document.getElementsByClassName("board")[0]
+    //     boardgrid.innerHTML = "";
+    //     // Iterate through grid
+    //     for (row of board) {
+    //         for (item of row) {
+    //             let new_item = document.createElement("div");
+    //             new_item.className = "board-item";
+    //             new_item.innerHTML = item;
+    //             boardgrid.appendChild(new_item);
+    //         }
+    //     }
+    // }
 
-    return {writeBoard}
+    return {board}
 })();
 
 // Tell when player can input dom element
@@ -39,7 +39,22 @@ var displayController = (function() {
         // Set isPlayer1turn to false, allowing player 2 to use their symbol
         // If tile is not empty, prompt player to enter again
     }
-    return {takeTurn};
+    const drawBoard = () => {
+        const boardgrid = document.getElementsByClassName("board")[0]
+        boardgrid.innerHTML = "";
+        // Iterate through grid
+        for (row of gameBoard.board) {
+            for (item of row) {
+                let new_item = document.createElement("div");
+                new_item.className = "board-item";
+                new_item.innerHTML = item;
+                boardgrid.appendChild(new_item);
+            }
+        }
+    }
+
+    // The function that actually changes the board should be private
+    return {takeTurn, drawBoard};
 })();
 
 function newPlayer(symbol, name) {
@@ -49,4 +64,4 @@ function newPlayer(symbol, name) {
 let Player1 = newPlayer("O", "Player 1")
 let Player2 = newPlayer("O", "Player 2")
 
-gameBoard.writeBoard();
+displayController.drawBoard();
