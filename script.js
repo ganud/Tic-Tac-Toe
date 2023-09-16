@@ -23,10 +23,23 @@ var gameBoard = (function() {
 
 // Tell when player can input dom element
 var displayController = (function() {
-    // Boolean displays if it is Player 1's turn(true initially)
-    // Have an HTML element display Player 1's turn
-    // Player 1 clicks on an empty square during their turn
-    //
+    let isPlayer1turn = true;
+    function takeTurn() {
+        const status = document.getElementsByClassName("status")[0];
+        if (isPlayer1turn) {
+            status.innerHTML = `${Player1.name}, make your move.`
+            isPlayer1turn = false;
+        }
+        else {
+            status.innerHTML = `${Player2.name}, make your move.`
+            isPlayer1turn = true;
+        }
+        // Gets 2 players, making use of symbol and name
+        // Let player1 alter the board by clicking on an element and using their symbol
+        // Set isPlayer1turn to false, allowing player 2 to use their symbol
+        // If tile is not empty, prompt player to enter again
+    }
+    return {takeTurn};
 })();
 
 function newPlayer(symbol, name) {
@@ -35,3 +48,5 @@ function newPlayer(symbol, name) {
 
 let Player1 = newPlayer("O", "Player 1")
 let Player2 = newPlayer("O", "Player 2")
+
+gameBoard.writeBoard();
