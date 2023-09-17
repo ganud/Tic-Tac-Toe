@@ -4,6 +4,7 @@ var gameBoard = (function() {
         ["0", "0", "0",],
         ["0", "0", "0",], 
     ];
+
     return {board}
 })();
 
@@ -31,14 +32,11 @@ var displayController = (function() {
     const drawBoard = () => {
         const boardgrid = document.getElementsByClassName("board")[0]
         boardgrid.innerHTML = "";
-        // Iterate through grid
-        // Each of the tiles should be given a value via index which corresponds to a TTT tile
-        // That value can be used in a switch statement to determine the target tile to be edited.
         let index = 0;
         for (row of gameBoard.board) {
             for (item of row) {
                 index++;
-                // Creates a tile that can be clicked
+                // prepares a clickable tile DOM element for a 3x3 grid
                 let new_item = document.createElement("div");
                 new_item.className = "board-item";
                 new_item.innerHTML = item;
@@ -153,10 +151,63 @@ var displayController = (function() {
                     gameBoard.board[2][2] = currentSymbol;
                 }
                 drawBoard(); 
-                break;
-                    
+                break;     
+        }
+        checkBoard(Player1);
+        checkBoard(Player2);
+        checkTie();
+    }
+
+    function checkBoard(player) {
+        // Check rows
+        if (gameBoard.board[0][0] == player.symbol && gameBoard.board[0][1] == player.symbol && gameBoard.board[0][2] == player.symbol) {
+            document.getElementsByClassName("status")[0].innerHTML = `${player.name} wins.`
+        }
+        else if (gameBoard.board[1][0] == player.symbol && gameBoard.board[1][1] == player.symbol && gameBoard.board[1][2] == player.symbol) {
+            document.getElementsByClassName("status")[0].innerHTML = `${player.name} wins.`
+        }
+        else if (gameBoard.board[2][0] == player.symbol && gameBoard.board[2][1] == player.symbol && gameBoard.board[2][2] == player.symbol) {
+            document.getElementsByClassName("status")[0].innerHTML = `${player.name} wins.`
+        }
+        // Check columns
+        else if (gameBoard.board[0][0] == player.symbol && gameBoard.board[1][0] == player.symbol && gameBoard.board[2][0] == player.symbol) {
+            document.getElementsByClassName("status")[0].innerHTML = `${player.name} wins.`
+        }
+        else if (gameBoard.board[0][1] == player.symbol && gameBoard.board[1][1] == player.symbol && gameBoard.board[2][1] == player.symbol) {
+            document.getElementsByClassName("status")[0].innerHTML = `${player.name} wins.`
+        }
+        else if (gameBoard.board[0][2] == player.symbol && gameBoard.board[1][2] == player.symbol && gameBoard.board[2][2] == player.symbol) {
+            document.getElementsByClassName("status")[0].innerHTML = `${player.name} wins.`
+        }
+        // Check diagonals
+        else if (gameBoard.board[0][0] == player.symbol && gameBoard.board[1][1] == player.symbol && gameBoard.board[2][2] == player.symbol) {
+            document.getElementsByClassName("status")[0].innerHTML = `${player.name} wins.`
+        }
+        else if (gameBoard.board[0][2] == player.symbol && gameBoard.board[1][1] == player.symbol && gameBoard.board[2][0] == player.symbol) {
+            document.getElementsByClassName("status")[0].innerHTML = `${player.name} wins.`
+        }
+        else {
+            // I don't know why, but this gets run.
         }
     }
+
+    function checkTie() {
+        let count = 0;
+        for (let i = 0; i < 3; i++)
+        {
+            for (let j = 0; j < 3; j++)
+            {
+                if (!gameBoard.board[i][j].includes("0"))
+                {
+                    count++;
+                }
+            }
+        }
+
+        if (count == 9) {
+            document.getElementsByClassName("status")[0].innerHTML = `Tie`
+        }
+    };
     return {drawBoard};
 })();
 
