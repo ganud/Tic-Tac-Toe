@@ -248,7 +248,5 @@ let Player2 = newPlayer("X", "Player 2")
 
 displayController.drawBoard();
 const resetButton = document.getElementById('reset');
-
-
 resetButton.addEventListener('click', displayController.resetBoard)
 
