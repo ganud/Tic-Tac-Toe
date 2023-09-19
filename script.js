@@ -8,13 +8,13 @@ var gameBoard = (function() {
     return {board}
 })();
 
-// Tell when player can input dom element
 var displayController = (function() {
     let isPlayer1turn = true;
     let currentSymbol = "";
     let gameCompleted = false;
     function takeTurn() {
         const status = document.getElementsByClassName("status")[0];
+        // 2 player turn control flow
         if (isPlayer1turn) {
             status.innerHTML = `${Player1.name}, make your move.`
             isPlayer1turn = false;
@@ -37,6 +37,7 @@ var displayController = (function() {
                 let new_item = document.createElement("div");
                 new_item.className = "board-item";
                 new_item.innerHTML = item;
+                // The value attribute will be used to determine the tile position to edit
                 new_item.setAttribute("value", index);
                 new_item.addEventListener('click', addTileClick)
                 boardgrid.appendChild(new_item);
@@ -44,12 +45,13 @@ var displayController = (function() {
         }
     }
 
-    // External named function used for the eventlistener
+    // External function used by eventlistener, it's named so it can be removed by lockBoard
     function addTileClick(eventThingy) {
         tileValue = eventThingy.target.getAttribute('value');
         changeTile(tileValue);
     }
-    // The function that actually changes the board should be private
+
+    // Change a valid tile
     function changeTile (tilevalue) {
         switch (tilevalue) {
             case "1": 
@@ -158,6 +160,7 @@ var displayController = (function() {
         if (gameCompleted == true) {lockBoard()}
     }
 
+    // Check everything except a tie
     function checkBoard(player) {
         // Check rows
         if (gameBoard.board[0][0] == player.symbol && gameBoard.board[0][1] == player.symbol && gameBoard.board[0][2] == player.symbol) {
@@ -195,7 +198,7 @@ var displayController = (function() {
             gameCompleted = true;
         }
         else {
-            // I don't know why, but this gets run, so checkTie is a separate function
+            // I don't know why, but this always gets run, so checkTie is a separate function
         }
     }
 
@@ -240,13 +243,17 @@ var displayController = (function() {
     return {drawBoard, resetBoard};
 })();
 
+// Player factory
 function newPlayer(symbol, name) {
     return {symbol, name};
 };
+
 let Player1 = newPlayer("O", "Player 1")
 let Player2 = newPlayer("X", "Player 2")
 
 displayController.drawBoard();
+
+// Makes reset button functional
 const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', displayController.resetBoard)
 
